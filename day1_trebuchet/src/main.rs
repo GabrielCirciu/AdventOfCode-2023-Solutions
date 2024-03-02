@@ -4,11 +4,11 @@ fn main() {
     let lines = read_lines("problem_input");
     let mut final_value = 0;
     for line in lines {
-        let first = find_number(line.clone());
-        let last = find_number(line.chars().rev().collect());
-        final_value += first + last;
+        final_value += (find_number(line.clone()) + &find_number(line.chars().rev().collect()))
+            .parse::<i32>()
+            .unwrap();
     }
-    println!("Final number: {}", final_value)
+    println!("{final_value}"); // Prints 55447, which is the correct answer
 }
 
 fn read_lines(filename: &str) -> Vec<String> {
@@ -19,13 +19,11 @@ fn read_lines(filename: &str) -> Vec<String> {
         .collect()
 }
 
-// Function that returns the first number in a string, without using Option
-fn find_number(s: String) -> i32 {
+fn find_number(s: String) -> String {
     for c in s.chars() {
-        if c.is_digit(10) {
-            // Turn the character into a number and return it
-            return c.to_string().parse().unwrap();
+        if c.is_numeric() {
+            return c.to_string();
         }
     }
-    0
+    "0".to_string()
 }

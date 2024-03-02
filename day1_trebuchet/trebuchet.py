@@ -1,21 +1,22 @@
 import os
 
-with open('problem_input', 'r') as file:
-    lines = file.readlines()
+def read_file(file_name):
+    with open(file_name, 'r') as file:
+        lines = file.readlines()
+    return [list(line.strip()) for line in lines]
 
-lines = [list(line.strip()) for line in lines]
-total = 0
+def find_digit(line, direction):
+    for char in line[::direction]:
+        if char.isdigit():
+            return char
+    return '0'
 
-for line in lines:
-    digits = ['0','0']
-    for i in range(len(line)):
-        if line[i].isdigit():
-            digits[0] = line[i]
-            break
-    for i in range(len(line)):
-        if line[i].isdigit():
-            digits[1] = line[i]
-    number = int(digits[0] + digits[1])
-    total += number
+def main():
+    total = 0
+    lines = read_file('problem_input')
+    for line in lines:
+        total += int(find_digit(line, 1) + find_digit(line, -1))
+    print(total)
 
-print(total)
+if __name__ == '__main__':
+    main()  # Prints 55447, which is the correct answer
