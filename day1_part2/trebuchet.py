@@ -1,4 +1,4 @@
-import os
+import re
 
 def read_file(file_name):
     with open(file_name, 'r') as file:
@@ -16,11 +16,12 @@ def main():
         indexes = []
         for (digit, value) in digits_table.items():
             if line.find(digit) != -1:
-                indexes.append((line.index(digit), value))
+                for m in re.finditer(digit, line):
+                    indexes.append((m.start(), value))
         indexes.sort()
         total += int(f"{indexes[0][1]}{indexes[-1][1]}")
 
     print(total)
 
 if __name__ == '__main__':
-    main()  # Answer should be 54706 but is returning 54761
+    main()  # Prints 54706 which is the correct answer
