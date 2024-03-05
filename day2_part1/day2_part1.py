@@ -23,4 +23,4 @@ def main():
     print(valid_sum)
 
 if __name__ == "__main__":
-    main()
+    main()  # Prints 2685, which is the correct answer
