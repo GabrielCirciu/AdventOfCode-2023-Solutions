@@ -5,7 +5,7 @@ def read_file(f_in):
 
 def main():
     file = read_file('day5_input')
-    print(file[0:4])
+    print(file[0])
 
 
 if __name__ == "__main__":
